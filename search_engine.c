@@ -32,12 +32,12 @@ void clean_text(char text[], int size)
     }
     *write = '\0';
 
-    while (isspace((unsigned char)*text))
+    while (isspace((unsigned char)*text)) //e
         text++;
 
     char *end = text + strlen(text) - 1;
     while (end > text && isspace((unsigned char)*end))
-        *end-- = '\0';
+        *end-- = '\0'; //s
 }
 
 void split_words(char *text, struct wordinfo dictionary[], int *total)
@@ -72,12 +72,13 @@ void display_dictionary(struct wordinfo dictionary[], int total)
 {
     for (int i = 0; i < total; i++)
     {
-        if (dictionary[i].count == 1)
-            printf("The word '%s' appeared one time\n", dictionary[i].word);
-        else
-            printf("The word '%s' appeared %d times\n", dictionary[i].word, dictionary[i].count);
+        printf("The word '%s' appeared ", dictionary[i].word);
+        for (int j = 0; j < dictionary[i].count; j++)
+            printf("*");
+        printf("\n");
     }
 }
+
 
 void search_word_exact(struct wordinfo dictionary[], int total)
 {
@@ -136,8 +137,14 @@ void sort_words_alph(struct wordinfo dictionary[], int total)
     }
     printf("\nWords sorted alphabetically:\n");
     for (int i = 0; i < total; i++)
-        printf("%s : %d\n", dictionary[i].word, dictionary[i].count);
+    {
+        printf("%s : ", dictionary[i].word);
+        for (int j = 0; j < dictionary[i].count; j++)
+            printf("*");
+        printf("\n");
+    }
 }
+
 
 void sort_words_by_count(struct wordinfo dictionary[], int total, int ascending)
 {
@@ -157,8 +164,14 @@ void sort_words_by_count(struct wordinfo dictionary[], int total, int ascending)
 
     printf("\nWords sorted by frequency %s:\n", ascending ? "(ascending)" : "(descending)");
     for (int i = 0; i < total; i++)
-        printf("%s : %d\n", dictionary[i].word, dictionary[i].count);
+    {
+        printf("%s : ", dictionary[i].word);
+        for (int j = 0; j < dictionary[i].count; j++)
+            printf("*");
+        printf("\n");
+    }
 }
+
 
 void statistics(struct wordinfo dictionary[], int total)
 {
